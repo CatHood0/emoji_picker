@@ -1,4 +1,4 @@
-import 'package:emoji_dialog_picker/src/domain/entities/entities.dart';
+import 'package:emoji_picker/src/domain/entities/entities.dart';
 
 final animalsAndNatureEmojis = {
   "dog": {

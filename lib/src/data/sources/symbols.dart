@@ -1,4 +1,4 @@
-import '../../domain/entities/emoji.dart';
+import 'package:emoji_picker/src/domain/entities/entities.dart';
 
 final symbolsEmojis = {
   "one_hundred": {
