@@ -8,14 +8,14 @@ Add Emoji Picker to your pubspec.yaml
 
 ```yaml
 dependencies:
-  emoji_picker: ^1.0.0
+  flutter_emoji_picker: ^1.0.0
 ```
 
 ## Usage
 
 ### Import the Package
 ```dart
-import 'package:emoji_picker/emoji_picker.dart';
+import 'package:flutter_emoji_picker/flutter_emoji_picker.dart';
 ```
 
 ### Wrap your `MaterialApp` with our `EmojiProvider`

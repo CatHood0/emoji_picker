@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:emoji_picker/src/domain/entities/emoji_type.dart';
-import 'package:emoji_picker/src/ui/bloc/emoji_bloc.dart';
-import 'package:emoji_picker/src/ui/bloc/emoji_events.dart';
-import 'package:emoji_picker/src/ui/widgets/emoji_view/emoji_picker_view.dart';
+import 'package:flutter_emoji_picker/src/domain/entities/emoji_type.dart';
+import 'package:flutter_emoji_picker/src/ui/bloc/emoji_bloc.dart';
+import 'package:flutter_emoji_picker/src/ui/bloc/emoji_events.dart';
+import 'package:flutter_emoji_picker/src/ui/widgets/emoji_view/emoji_picker_view.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart' hide SearchBar;
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,6 +1,6 @@
-import 'package:emoji_picker/src/domain/entities/emoji_list.dart';
+import 'package:flutter_emoji_picker/src/domain/entities/emoji_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:emoji_picker/src/domain/repository/emoji_repository.dart';
+import 'package:flutter_emoji_picker/src/domain/repository/emoji_repository.dart';
 import 'emoji_events.dart';
 import 'emoji_states.dart';
 

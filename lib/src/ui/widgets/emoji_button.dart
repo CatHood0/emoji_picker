@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:emoji_picker/src/ui/widgets/emoji_view/emoji_picker_view_configuration.dart';
-import 'package:emoji_picker/src/ui/widgets/overlay/emoji_overlay.dart';
+import 'package:flutter_emoji_picker/src/ui/widgets/emoji_view/emoji_picker_view_configuration.dart';
+import 'package:flutter_emoji_picker/src/ui/widgets/overlay/emoji_overlay.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../emoji_picker.dart';
 import 'dialog/emoji_picker_view.dart';
 import 'emoji_view/emoji_picker_view.dart';
 

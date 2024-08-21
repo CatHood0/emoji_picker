@@ -1,4 +1,4 @@
-library emoji_picker;
+library flutter_emoji_picker;
 
 export 'src/ui/widgets/emoji_button.dart';
 export 'src/ui/widgets/emoji_list_view.dart';

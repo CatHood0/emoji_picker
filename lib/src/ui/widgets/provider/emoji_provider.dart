@@ -1,5 +1,5 @@
-import 'package:emoji_picker/src/domain/repository/emoji_repository.dart';
-import 'package:emoji_picker/src/ui/bloc/emoji_bloc.dart';
+import 'package:flutter_emoji_picker/src/domain/repository/emoji_repository.dart';
+import 'package:flutter_emoji_picker/src/ui/bloc/emoji_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

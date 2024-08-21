@@ -1,4 +1,4 @@
-import 'package:emoji_picker/src/domain/entities/entities.dart';
+import 'package:flutter_emoji_picker/src/domain/entities/entities.dart';
 
 final symbolsEmojis = {
   "one_hundred": {

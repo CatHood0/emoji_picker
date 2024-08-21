@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:emoji_picker/emoji_picker.dart';
-import 'package:emoji_picker/src/domain/entities/emoji_type.dart';
+import 'package:flutter_emoji_picker/flutter_emoji_picker.dart';
+import 'package:flutter_emoji_picker/src/domain/entities/emoji_type.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
