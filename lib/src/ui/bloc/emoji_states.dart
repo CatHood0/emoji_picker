@@ -1,4 +1,4 @@
-import 'package:emoji_dialog_picker/src/domain/entities/emoji_list.dart';
+import 'package:emoji_picker/src/domain/entities/emoji_list.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class EmojiPickerState extends Equatable {

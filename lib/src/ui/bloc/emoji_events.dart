@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:emoji_dialog_picker/src/domain/entities/emoji_type.dart';
+import 'package:emoji_picker/src/domain/entities/emoji_type.dart';
 
 abstract class EmojiPickerEvent extends Equatable {
   const EmojiPickerEvent();
