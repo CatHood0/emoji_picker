@@ -17,11 +17,11 @@ class EmojiProvider extends StatefulWidget {
 }
 
 class _EmojiProviderState extends State<EmojiProvider> {
-  late EmojiPickerBloc _emojiPickerBloc;
-
   @override
   void dispose() {
-    _emojiPickerBloc.close();
+    if (mounted) {
+      context.read<EmojiPickerBloc>().close();
+    }
     super.dispose();
   }
 

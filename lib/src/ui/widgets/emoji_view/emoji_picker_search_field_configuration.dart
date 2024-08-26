@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class EmojiPickerSearchFieldConfiguration {
-  EmojiPickerSearchFieldConfiguration(
-    this.shapeBorder, {
+  EmojiPickerSearchFieldConfiguration({
+    this.shapeBorder,
     this.hintText = 'Select an emoji item',
     this.color,
     this.searchIconColor,

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_emoji_picker/src/domain/entities/emoji_type.dart';
 
 abstract class EmojiPickerEvent extends Equatable {
   const EmojiPickerEvent();
@@ -9,12 +8,10 @@ abstract class EmojiPickerEvent extends Equatable {
 }
 
 class GetEmojiEvent extends EmojiPickerEvent {
-  final EmojiType emojiType;
-
-  const GetEmojiEvent(this.emojiType);
+  const GetEmojiEvent();
 
   @override
-  List<Object?> get props => [emojiType];
+  List<Object?> get props => [];
 }
 
 class FilterEmojiEvent extends EmojiPickerEvent {

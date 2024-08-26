@@ -7,13 +7,31 @@ import 'package:flutter_emoji_picker/src/data/sources/people.dart';
 import 'package:flutter_emoji_picker/src/data/sources/symbols.dart';
 import 'package:flutter_emoji_picker/src/data/sources/travel_and_places.dart';
 
-final commonEmojis = [
-  ...activityEmojis,
-  ...animalsAndNatureEmojis,
-  ...flagsEmojis,
-  ...foodAndDrinkEmojis,
-  ...objectEmojis,
-  ...peopleEmojis,
-  ...symbolsEmojis,
-  ...travelAndPlacesEmojis
-];
+import '../../domain/entities/entities.dart';
+
+final Map<String, List<Emoji>> commonEmojis = <String, List<Emoji>>{
+  'People': [
+    ...peopleEmojis,
+  ],
+  'Nature': [
+    ...animalsAndNatureEmojis,
+  ],
+  'Food': [
+    ...foodAndDrinkEmojis,
+  ],
+  'Activity': [
+    ...activityEmojis,
+  ],
+  'Places': [
+    ...travelAndPlacesEmojis,
+  ],
+  'Objects': [
+    ...objectEmojis,
+  ],
+  'Symbols': [
+    ...symbolsEmojis,
+  ],
+  'Flags': [
+    ...flagsEmojis,
+  ]
+};

@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter_emoji_picker/src/ui/widgets/bottomsheet/emoji_picker_bottom_sheet.dart';
+import 'package:flutter_emoji_picker/src/ui/widgets/dialog/emoji_dialog_picker_view.dart';
 import 'package:flutter_emoji_picker/src/ui/widgets/emoji_view/emoji_picker_view_configuration.dart';
-import 'package:flutter_emoji_picker/src/ui/widgets/overlay/emoji_overlay.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dialog/emoji_picker_view.dart';
 import 'emoji_view/emoji_picker_view.dart';
 
 /// A button that can be used to select an emoji.
@@ -54,7 +54,13 @@ class EmojiButton extends StatefulWidget {
 }
 
 class _EmojiButtonState extends State<EmojiButton> {
-  OverlayEntry? overlayEntry;
+  final ValueNotifier<String?> _currentHoverEmoji = ValueNotifier('');
+
+  @override
+  void dispose() {
+    _currentHoverEmoji.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,56 +68,44 @@ class _EmojiButtonState extends State<EmojiButton> {
       alignment: Alignment.centerLeft,
       child: InkWell(
         radius: widget.radius,
-        onTap: () {
+        onTap: () async {
           if (widget.emojiPickerViewConfiguration.viewType ==
-              ViewType.overlay) {
-            final RenderBox renderBox = context.findRenderObject() as RenderBox;
-            final Offset offset = renderBox.localToGlobal(Offset.zero);
-            final Size size = renderBox.size;
-            final child = EmojiPickerOverlayView(
-              offset: offset,
-              boxSize: size,
-              onEmojiSelected: (value) {
-                widget.emojiPickerViewConfiguration.onEmojiSelected(value);
-              },
-              onClose: () {
-                if (overlayEntry != null) overlayEntry!.remove();
-                overlayEntry = null;
-              },
-              height: widget.emojiPickerViewConfiguration.height,
-              width: widget.emojiPickerViewConfiguration.width,
-              decoration: widget.emojiPickerViewConfiguration.decoration,
-              scrollBehavior:
-                  widget.emojiPickerViewConfiguration.scrollBehavior,
-              hintText: widget.emojiPickerViewConfiguration.hintText,
-              backgroundColor:
-                  widget.emojiPickerViewConfiguration.backgroundColor,
-              searchBarColor:
-                  widget.emojiPickerViewConfiguration.searchBarColor,
-              searchIconColor:
-                  widget.emojiPickerViewConfiguration.searchIconColor,
-              searchShapeBorder:
-                  widget.emojiPickerViewConfiguration.searchShapeBorder,
-              textStyle: widget.emojiPickerViewConfiguration.textStyle,
-              hintStyle: widget.emojiPickerViewConfiguration.hintStyle,
-              activeColor: widget.emojiPickerViewConfiguration.activeColor,
-              inactiveColor: widget.emojiPickerViewConfiguration.inactiveColor,
-            );
-            if (overlayEntry == null) {
-              overlayEntry = OverlayEntry(
-                maintainState: true,
-                builder: (context) => child,
-              );
-              Overlay.of(context).insert(overlayEntry!);
-            } else {
-              overlayEntry!.remove();
-              overlayEntry = null;
-            }
+              ViewType.bottomsheet) {
+            showBottomSheet(
+                context: context,
+                builder: (ctx) {
+                  return EmojiPickerBottomSheetView(
+                    onEmojiSelected:
+                        widget.emojiPickerViewConfiguration.onEmojiSelected,
+                    currentHoverEmoji: _currentHoverEmoji,
+                    height: widget.emojiPickerViewConfiguration.height,
+                    width: widget.emojiPickerViewConfiguration.width,
+                    decoration: widget.emojiPickerViewConfiguration.decoration,
+                    scrollBehavior:
+                        widget.emojiPickerViewConfiguration.scrollBehavior,
+                    hintText: widget.emojiPickerViewConfiguration.hintText,
+                    backgroundColor:
+                        widget.emojiPickerViewConfiguration.backgroundColor,
+                    searchBarColor:
+                        widget.emojiPickerViewConfiguration.searchBarColor,
+                    searchIconColor:
+                        widget.emojiPickerViewConfiguration.searchIconColor,
+                    searchShapeBorder:
+                        widget.emojiPickerViewConfiguration.searchShapeBorder,
+                    textStyle: widget.emojiPickerViewConfiguration.textStyle,
+                    hintStyle: widget.emojiPickerViewConfiguration.hintStyle,
+                    activeColor:
+                        widget.emojiPickerViewConfiguration.activeColor,
+                    inactiveColor:
+                        widget.emojiPickerViewConfiguration.inactiveColor,
+                  );
+                });
           }
           if (widget.emojiPickerViewConfiguration.viewType == ViewType.dialog) {
             final child = EmojiPickerDialogView(
               onEmojiSelected:
                   widget.emojiPickerViewConfiguration.onEmojiSelected,
+              currentHoverEmoji: _currentHoverEmoji,
               height: widget.emojiPickerViewConfiguration.height,
               width: widget.emojiPickerViewConfiguration.width,
               decoration: widget.emojiPickerViewConfiguration.decoration,

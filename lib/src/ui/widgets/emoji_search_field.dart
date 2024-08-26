@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -26,46 +25,32 @@ class EmojiSearchField extends HookWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
 
-  /// {@template hint_text}
   /// The hint text to display in the search bar.
-  /// {@endtemplate}
   final String hintText;
 
   /// Triggers when the text in the search bar changes.
   final Function(String?)? onChanged;
   final Function(String)? onSubmitted;
 
-  /// {@template search_bar_color}
   /// The background color of the search bar.
-  /// {@endtemplate}
   final Color? color;
 
-  /// {@template search_bar_icon_color}
   /// The color of the search icon
-  /// {@endtemplate}
   final Color? searchIconColor;
 
-  /// {@template search_bar_shape_border}
   /// The shape of the search bar.
-  /// {@endtemplate}
   final ShapeBorder? shapeBorder;
 
-  /// {@template search_bar_text_style}
   /// The text style of the search bar.
-  /// {@endtemplate}
   final TextStyle? textStyle;
 
-  /// {@template search_bar_hint_style}
   /// The text style of the hint text.
-  /// {@endtemplate}
   final TextStyle? hintStyle;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       color: color,
-      margin: EdgeInsets.all(10),
-      shape: shapeBorder ?? const StadiumBorder(),
       child: Platform.isIOS || Platform.isMacOS
           ? CupertinoTextField(
               style: textStyle,
@@ -92,37 +77,66 @@ class EmojiSearchField extends HookWidget {
             )
           : Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: TextFormField(
-                style: textStyle,
-                focusNode: focusNode,
-                controller: controller,
-                textInputAction: TextInputAction.search,
-                decoration: InputDecoration(
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 18,
-                      right: 12,
+              child: Container(
+                width: 100,
+                child: TextFormField(
+                  style: textStyle,
+                  focusNode: focusNode,
+                  controller: controller,
+                  textInputAction: TextInputAction.search,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: IconButton(
-                      icon: const Icon(Icons.search),
-                      color: searchIconColor ?? Colors.grey,
-                      onPressed: () {
-                        onSubmitted?.call(controller.text.trim());
-                      },
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(
+                          255,
+                          40,
+                          213,
+                          255,
+                        ),
+                      ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 10,
+                        right: 12,
+                      ),
+                      child: InkWell(
+                        hoverColor: Colors.black.withOpacity(0.2),
+                        customBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          side: const BorderSide(),
+                        ),
+                        onTap: () {
+                          onSubmitted?.call(controller.text.trim());
+                        },
+                        child: SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: Icon(
+                            Icons.search,
+                            color: searchIconColor ?? Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                    prefixIconConstraints: const BoxConstraints(
+                      minWidth: 12,
+                      minHeight: 12,
+                    ),
+                    hintText: hintText,
+                    hintStyle: hintStyle,
+                    counterText: '',
                   ),
-                  prefixIconConstraints: const BoxConstraints(
-                    minWidth: 12,
-                    minHeight: 12,
-                  ),
-                  hintText: hintText,
-                  hintStyle: hintStyle,
-                  counterText: '',
+                  onChanged: onChanged,
+                  onFieldSubmitted: onSubmitted,
                 ),
-                onChanged: onChanged,
-                onFieldSubmitted: onSubmitted,
               ),
             ),
     );

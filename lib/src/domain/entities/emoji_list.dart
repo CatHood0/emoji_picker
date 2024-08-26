@@ -1,15 +1,15 @@
-import 'package:flutter_emoji_picker/src/domain/entities/entities.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_emoji_picker/src/domain/entities/entities.dart';
 import 'emoji.dart';
 
 class EmojisManager {
-  final List<Emoji> emojis;
+  final Map<String, List<Emoji>> emojis;
   EmojisManager({
     required this.emojis,
   });
 
   EmojisManager copyWith({
-    List<Emoji>? emojis,
+    Map<String, List<Emoji>>? emojis,
   }) {
     return EmojisManager(
       emojis: emojis ?? this.emojis,
@@ -17,23 +17,7 @@ class EmojisManager {
   }
 
   factory EmojisManager.empty() {
-    return EmojisManager(emojis: []);
-  }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'emojis': emojis.map((x) => x.toJson()).toList(),
-    };
-  }
-
-  factory EmojisManager.fromJson(Map<String, dynamic> map) {
-    return EmojisManager(
-      emojis: List<Emoji>.from(
-        (map['emojis']).map<Emoji>(
-          (x) => Emoji.fromJson(x as Map<String, dynamic>),
-        ),
-      ),
-    );
+    return EmojisManager(emojis: {});
   }
 
   @override
@@ -43,7 +27,7 @@ class EmojisManager {
   bool operator ==(covariant EmojisManager other) {
     if (identical(this, other)) return true;
 
-    return listEquals(other.emojis, emojis);
+    return mapEquals(other.emojis, emojis);
   }
 
   @override

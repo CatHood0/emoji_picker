@@ -1,54 +1,36 @@
-import 'package:flutter_emoji_picker/src/data/sources/activity.dart';
-import 'package:flutter_emoji_picker/src/data/sources/animals_and_nature.dart';
 import 'package:flutter_emoji_picker/src/data/sources/common_emojis.dart';
-import 'package:flutter_emoji_picker/src/data/sources/flags.dart';
-import 'package:flutter_emoji_picker/src/data/sources/food_and_drink.dart';
-import 'package:flutter_emoji_picker/src/data/sources/objects.dart';
-import 'package:flutter_emoji_picker/src/data/sources/people.dart';
-import 'package:flutter_emoji_picker/src/data/sources/symbols.dart';
-import 'package:flutter_emoji_picker/src/data/sources/travel_and_places.dart';
 import '../entities/entities.dart';
 
-class EmojiRepository {
-  EmojiType lastTypeEmoji = EmojiType.unknown;
+final Map<String, List<Emoji>> _defaultEmojis = Map.unmodifiable(commonEmojis);
 
-  Future<EmojisManager> getEmojis(EmojiType emojiType) async {
-    lastTypeEmoji = emojiType;
-    final values = _mapEmojiTypeToEmojiFile(emojiType);
+class EmojiRepository {
+  Future<EmojisManager> getEmojis() async {
     return EmojisManager(
-      emojis: values,
+      emojis: _defaultEmojis,
     );
   }
 
-  Future<List<Emoji>> findEmoji(String filter) async {
+  Future<Map<String, List<Emoji>>> findEmoji(String filter) async {
     if (filter.isEmpty) {
-      return _mapEmojiTypeToEmojiFile(lastTypeEmoji);
+      return _defaultEmojis;
     }
-
-    return commonEmojis
-        .where((emoji) => emoji.keywords.contains(filter.toLowerCase()))
-        .toList();
-  }
-
-  List<Emoji> _mapEmojiTypeToEmojiFile(EmojiType emojiType) {
-    if (emojiType == EmojiType.activity) {
-      return activityEmojis;
-    } else if (emojiType == EmojiType.animalsAndNature) {
-      return animalsAndNatureEmojis;
-    } else if (emojiType == EmojiType.flags) {
-      return flagsEmojis;
-    } else if (emojiType == EmojiType.foodAndDrink) {
-      return foodAndDrinkEmojis;
-    } else if (emojiType == EmojiType.objects) {
-      return objectEmojis;
-    } else if (emojiType == EmojiType.people) {
-      return peopleEmojis;
-    } else if (emojiType == EmojiType.symbols) {
-      return symbolsEmojis;
-    } else if (emojiType == EmojiType.travelsAndPlaces) {
-      return travelAndPlacesEmojis;
-    } else {
-      return commonEmojis;
-    }
+    final filteredEmojis = <String, List<Emoji>>{};
+    filteredEmojis.addAll(
+      _defaultEmojis.map(
+        (key, value) {
+          return MapEntry(
+            key,
+            value
+                .where(
+                  (emoji) => emoji.keywords.contains(
+                    filter.toLowerCase(),
+                  ),
+                )
+                .toList(),
+          );
+        },
+      ),
+    );
+    return filteredEmojis;
   }
 }

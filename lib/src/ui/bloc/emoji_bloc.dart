@@ -19,10 +19,10 @@ class EmojiPickerBloc extends Bloc<EmojiPickerEvent, EmojiPickerState> {
   Future<void> _onGetEmoji(
       GetEmojiEvent event, Emitter<EmojiPickerState> emit) async {
     emit(const EmojiPickerLoading());
-    final emojis = await emojiRepository.getEmojis(event.emojiType);
+    final emojis = await emojiRepository.getEmojis();
     emit(
       EmojiPickerLoaded(
-        emojis: emojis,
+        manager: emojis,
       ),
     );
   }
@@ -34,11 +34,13 @@ class EmojiPickerBloc extends Bloc<EmojiPickerEvent, EmojiPickerState> {
       final filteredEmojis = await emojiRepository.findEmoji(event.filter);
       emit(
         EmojiPickerLoaded(
-          emojis: EmojisManager(emojis: filteredEmojis),
+          hasFilteredData: event.filter.isNotEmpty,
+          manager: EmojisManager(emojis: filteredEmojis),
         ),
       );
     } catch (e) {
-      emit(EmojiPickerError('The emoji called ${event.filter} not exist'));
+      emit(EmojiPickerError(
+          'Ops! No emojis was founded by query = ${event.filter}'));
     }
   }
 }

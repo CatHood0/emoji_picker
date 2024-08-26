@@ -17,14 +17,16 @@ class EmojiPickerLoading extends EmojiPickerState {
 }
 
 class EmojiPickerLoaded extends EmojiPickerState {
-  final EmojisManager emojis;
+  final bool hasFilteredData;
+  final EmojisManager manager;
 
   const EmojiPickerLoaded({
-    required this.emojis,
+    required this.manager,
+    this.hasFilteredData = false,
   });
 
   @override
-  List<Object?> get props => [emojis];
+  List<Object?> get props => [manager, hasFilteredData];
 }
 
 class EmojiPickerSearching extends EmojiPickerState {
