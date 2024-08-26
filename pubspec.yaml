@@ -1,7 +1,7 @@
 name: flutter_emoji_picker
 description: 'An simple emojis picker that makes too easy select emojis from any platform'
-version: 1.0.0
-homepage: https://github.com/CatHood0/emoji_picker.git 
+version: 1.0.1
+homepage: https://github.com/CatHood0/emoji_picker/ 
 issue_tracker: https://github.com/CatHood0/emoji_picker/issues/  
 documentation: https://github.com/CatHood0/emoji_picker/ 
 
@@ -21,7 +21,6 @@ platforms:
   ios:
   linux:
   macos:
-  web:
   windows:
 
 dependencies:
@@ -34,6 +33,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
   flutter_hooks: ^0.20.5
+  sliver_tools: ^0.2.12
 
 dev_dependencies:
   flutter_test:
